@@ -1,5 +1,6 @@
 import React from "react";
 import "./custom.css";
+import { connect } from "react-redux";
 import {
   Button,
   Form,
@@ -10,7 +11,6 @@ import {
 } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
-  constructor() {}
   render() {
     return (
       <div className="login-form">

@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DashboardPage from "./DashboardPage";
+import LoginForm from "./LoginForm";
 
-ReactDOM.render(<DashboardPage />, document.getElementById("root"));
+ReactDOM.render(<LoginForm />, document.getElementById("root"));
