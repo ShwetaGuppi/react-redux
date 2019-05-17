@@ -1,6 +1,7 @@
 import React from "react";
 import "./custom.css";
 import { connect } from "react-redux";
+import axios from "axios";
 import {
   Button,
   Form,
@@ -11,6 +12,18 @@ import {
 } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
+  handleClick = () => {
+    var userInput = document.getElementById("usernameInput");
+    var userValue = userInput.value;
+    var passInput = document.getElementById("passwordInput");
+    var passValue = passInput.value;
+
+    axios.get(`http://localhost:3000/users`).then(res => {
+      if (res.username == userValue && res.password === passValue) {
+        alert("redirect");
+      }
+    });
+  };
   render() {
     return (
       <div className="login-form">
@@ -39,6 +52,7 @@ class LoginForm extends React.Component {
                   icon="user"
                   iconPosition="left"
                   placeholder="E-mail address"
+                  id="usernameInput"
                 />
                 <Form.Input
                   fluid
@@ -46,9 +60,15 @@ class LoginForm extends React.Component {
                   iconPosition="left"
                   placeholder="Password"
                   type="password"
+                  id="passwordInput"
                 />
 
-                <Button color="teal" fluid size="large">
+                <Button
+                  color="teal"
+                  fluid
+                  size="large"
+                  onClick={this.handleClick}
+                >
                   Login
                 </Button>
               </Segment>
@@ -62,5 +82,14 @@ class LoginForm extends React.Component {
     );
   }
 }
+const mapStateToProps = state => ({});
 
-export default LoginForm;
+const mapDispatchToProps = dispatch => ({
+  getLocations: offset => dispatch(getLocations(offset)),
+  resetQueryObjToDefault: () => dispatch(resetQueryObjToDefault())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm);
